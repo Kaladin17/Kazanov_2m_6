@@ -14,64 +14,74 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Button button;
-    EditText editText;
-    EditText editText1;
-
-
-    private TextWatcher loginTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
-        }
-        @Override
-        public void onTextChanged(CharSequence s, int i, int i1, int i2) {
-            String emailInput = editText.getText().toString().trim();
-            String passwordInput = editText1.getText().toString().trim();
-            if (emailInput.isEmpty() || passwordInput.isEmpty()) {
-                button.setBackgroundColor(getColor(R.color.grey));
-            }
-            else {
-                button.setBackgroundColor(getColor(R.color.terracot));
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-        }
-    };
-
+    private Button button;
+    private EditText email, password;
+    private TextView enter, welcome, message, forget;
     @Override @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        editText = findViewById(R.id.email);
-        editText1 = findViewById(R.id.password);
+        email = findViewById(R.id.et_email);
+        password = findViewById(R.id.et_password);
+        button = findViewById(R.id.button);
+        enter = findViewById(R.id.tv_enter);
+        welcome = findViewById(R.id.tv_welcome);
+        message = findViewById(R.id.tv_message);
+        forget = findViewById(R.id.tv_forget);
 
-        editText.addTextChangedListener(loginTextWatcher);
-        editText1.addTextChangedListener(loginTextWatcher);
-
-        String emailInput = editText.getText().toString();
-        String passwordInput = editText1.getText().toString();
-
-        ConstraintLayout constraintLayout = findViewById(androidx.constraintlayout.widget.R.id.constraint);
-
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+        email.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view) {
-                if (emailInput == "admin" && passwordInput == "admin") {
-                    Toast.makeText(MainActivity.this, "Вы успешно зарегистрированы!", Toast.LENGTH_LONG).show();
-                    constraintLayout.setVisibility(View.INVISIBLE);
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (email.getText().toString().isEmpty()){
+                    button.setBackgroundColor(getColor(R.color.grey));
+
                 } else {
-                    Toast.makeText(MainActivity.this, "Логин или пароль введены неправильно", Toast.LENGTH_LONG).show();
-                    constraintLayout.setVisibility(View.VISIBLE);
+                    password.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        }
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        }
+                        @Override
+                        public void afterTextChanged(Editable editable) {
+                            if (password.getText().toString().isEmpty()){
+                                button.setBackgroundColor(getColor(R.color.grey));
+                            } else {
+                                button.setBackgroundColor(getColor(R.color.terracot));
+                            }
+                        }
+                    });
+
                 }
             }
+        });
 
+        button.setOnClickListener(view -> {
+            if (email.getText().toString().equals("admin") && password.getText().toString().equals("admin")){
+                email.setVisibility(View.INVISIBLE);
+                password.setVisibility(View.INVISIBLE);
+                button.setVisibility(View.INVISIBLE);
+                enter.setVisibility(View.INVISIBLE);
+                message.setVisibility(View.INVISIBLE);
+                forget.setVisibility(View.INVISIBLE);
+                Toast.makeText(this, "Авторизация прошла успешно!", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Неверный логин или пароль", Toast.LENGTH_LONG).show();
+
+            }
         });
     }
 }

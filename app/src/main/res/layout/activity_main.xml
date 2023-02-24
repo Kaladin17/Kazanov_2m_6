@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
     <TextView
-        android:id="@+id/message"
+        android:id="@+id/tv_message"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
@@ -53,20 +53,20 @@
         android:text="      Выполните вход      или зарегистрируйтесь."
         />
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="160dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/message"
+        app:layout_constraintTop_toBottomOf="@id/tv_message"
         android:layout_marginTop="80dp"
         android:hint="Введите вашу почту"
         android:background="@drawable/bg_edit_text"
         />
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginHorizontal="24dp"
@@ -74,26 +74,26 @@
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email"
+        app:layout_constraintTop_toBottomOf="@id/et_email"
         android:layout_marginVertical="20dp"
         android:hint="Введите ваш пароль"
         android:background="@drawable/bg_edit_text"
         />
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="52dp"
         android:layout_marginHorizontal="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/et_password"
         android:layout_marginTop="20dp"
         android:text="Войти"
         android:textSize="18sp"
         android:textAllCaps="false"
         android:textStyle="bold"
-        android:background="@drawable/bg_button"
-        android:enabled="false"
+        android:backgroundTint="@color/grey"
+        android:enabled="true"
         />
     <TextView
         android:id="@+id/tv_forget"
